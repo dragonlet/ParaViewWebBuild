@@ -1,0 +1,9 @@
+#!/bin/bash
+port=$(findPort.sh)
+
+export PV_HOME=
+export PW_HOME=
+
+ $PV_HOME/bin/pvserver --server-port=$port &
+ $PW_HOME/ParaViewAdapter/PWServer --server-hostname=localhost --server-port=$port --batch-file=.../manta-init.py $1 $2 $3 $4 $5 $6 $7
+
