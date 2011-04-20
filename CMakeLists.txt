@@ -24,14 +24,19 @@ set (CMAKE_BUILD_TYPE         "Debug" CACHE STRING "Type of Build" FORCE)
 set (TARBALL_SERVERS          "https://hsai-dev/tarballs" CACHE STRING "URL tarballs server")
 set (TARBALLS_DIRS            $ENV{HOME}/tarballs ${CMAKE_SOURCE_DIR}/tarballs CACHE PATH "Source tarballs directories")
 set (DOWNLOAD_DIR             ${base}/Download CACHE PATH "Source package download directory")
-find_path(ParaView_DIR libKWCommon.so ${CSE_HOME}/Beta/paraview-daily/bin ${CMAKE_INSTALL_PREFIX}/pv_mesa-3.11/lib/paraview-3.11)
 
-list(APPEND CMAKE_MODULE_PATH "${CSE_HOME}/Misc/CMake")
-find_package(CSE)
+option(PV_DEV_BUILD "Build ParaView Development"   ON)
+option(PV_MESA      "Build ParaView with mesa OS" OFF)
+option(WITH_CSE     "Build with CSE"               ON)
 
-set (PYTHON_HOME             ${CSE_PYTHON_HOME} CACHE PATH "Python Home")
-set (PYTHON_LIBRARY_DIR      ${PYTHON_HOME}/lib CACHE PATH "Python lib dir" FORCE)
-MARK_AS_ADVANCED(PYTHON_LIBRARY_DIR)
+if ( CSE_HOME AND WITH_CSE)
+    list(APPEND CMAKE_MODULE_PATH "${CSE_HOME}/Misc/CMake") 
+    find_package(CSE)
+endif ()
+
+FIND_PACKAGE(PythonInterp)
+FIND_PACKAGE(PythonLibs)
+get_filename_component(PYTHON_LIBRARY_DIR  ${PYTHON_LIBRARY} PATH)
 
 set (ENV{PATH}               "${CMAKE_INSTALL_PREFIX}/bin:${PYTHON_HOME}/bin:$ENV{PATH}")
 set (ENV{LD_LIBRARY_PATH}    "${CMAKE_INSTALL_PREFIX}/lib:${ParaView_DIR}:$ENV{LD_LIBRARY_PATH}")
@@ -143,7 +148,9 @@ ExternalProject_Add(${tomcat_proj}
 
 #add_subdirectory(paraview-release EXCLUDE_FROM_ALL)
 
-add_subdirectory(paraview-devel EXCLUDE_FROM_ALL)
+if (PV_DEV_BUILD)
+    add_subdirectory(paraview-devel)
+endif()
 
 add_subdirectory(pwsource)
 add_subdirectory(pwserver)

@@ -19,7 +19,7 @@ ExternalProject_Add(${pwserver_proj}
              -DBUILD_TESTING=ON
              -DBUILD_WEB_SERVICE=OFF
              -DParaView_DIR=${ParaView_DIR}
-             -DCMAKE_MODULE_PATH=${ParaView_DIR}
+             -DCMAKE_MODULE_PATH:PATH=${ParaView_DIR}::${ParaView_DIR}/..
              -DCMAKE_INSTALL_RPATH:PATH=${pwserver_prefix}/lib::${ParaView_DIR}::${activemq_cpp_prefix}/lib::${PYTHON_LIBRARY_DIR}
   BUILD_COMMAND ${BUILD_CMD_SMP}
   DEPENDS ${activemq_cpp_proj} ${PWSOURCE}
