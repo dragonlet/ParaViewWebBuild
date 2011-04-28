@@ -34,6 +34,7 @@ if ( CSE_HOME AND WITH_CSE)
     find_package(CSE)
 endif ()
 
+FIND_PACKAGE(Java)
 FIND_PACKAGE(PythonInterp)
 FIND_PACKAGE(PythonLibs)
 get_filename_component(PYTHON_LIBRARY_DIR  ${PYTHON_LIBRARY} PATH)

@@ -1,12 +1,13 @@
 
 set(paraview_src_name    "paraview_src")
-set(paraview_src_version "git")
+set(paraview_src_version "3.10.1")
 set(paraview_src_proj    "${paraview_src_name}-${paraview_src_version}")
 set(paraview_src_git     "git://paraview.org/ParaView.git")
 
 ExternalProject_Add(${paraview_src_proj}
   GIT_REPOSITORY ${paraview_src_git}
-  GIT_TAG master
+  #GIT_TAG master
+  GIT_TAG "v${paraview_src_version}"
   CONFIGURE_COMMAND ""
   BUILD_COMMAND ""
   INSTALL_COMMAND ""
@@ -24,7 +25,7 @@ message("Pavaview Git source: ${pv_src_dev_dir}")
 if (NOT PV_MESA)
 
 set(paraview_name    "paraview_devel")
-set(paraview_version "3.11")
+set(paraview_version "3.10")
 set(paraview_proj    "${paraview_name}-${paraview_version}")
 set(paraview_prefix  "${CMAKE_INSTALL_PREFIX}/pv-${paraview_version}")
 

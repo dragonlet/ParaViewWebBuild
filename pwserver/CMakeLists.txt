@@ -10,16 +10,16 @@ ExternalProject_Add(${pwserver_proj}
   INSTALL_DIR ${pwserver_prefix}
   LIST_SEPARATOR ::
   CMAKE_GENERATOR "${CMAKE_GENERATOR}"
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
              -DCMAKE_BUILD_TYPE=Debug
-             -DCMAKE_VERBOSE_MAKEFILE=ON
-             -DACTIVEMQ_CPP=${activemq_cpp_prefix}/lib/libactivemq-cpp.so
-             -DACTIVEMQ_INCLUDE_DIR=${activemq_cpp_prefix}/include/${activemq_cpp_proj}
-             -DBUILD_PW_SERVER=ON
-             -DBUILD_TESTING=ON
-             -DBUILD_WEB_SERVICE=OFF
-             -DParaView_DIR=${ParaView_DIR}
-             -DCMAKE_MODULE_PATH:PATH=${ParaView_DIR}::${ParaView_DIR}/..
+             -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
+             -DACTIVEMQ_CPP:FILEPATH=${activemq_cpp_prefix}/lib/libactivemq-cpp.so
+             -DACTIVEMQ_INCLUDE_DIR:PATH=${activemq_cpp_prefix}/include/${activemq_cpp_proj}
+             -DBUILD_PW_SERVER:BOOL=ON
+             -DBUILD_TESTING:BOOL=ON
+             -DBUILD_WEB_SERVICE:BOOL=OFF
+             -DParaView_DIR:PATH=${ParaView_DIR}
+             -DCMAKE_MODULE_PATH:PATH=${ParaView_DIR}
              -DCMAKE_INSTALL_RPATH:PATH=${pwserver_prefix}/lib::${ParaView_DIR}::${activemq_cpp_prefix}/lib::${PYTHON_LIBRARY_DIR}
   BUILD_COMMAND ${BUILD_CMD_SMP}
   DEPENDS ${activemq_cpp_proj} ${PWSOURCE}
@@ -30,4 +30,3 @@ ExternalProject_Get_Property(${pwserver_proj} source_dir binary_dir install_dir)
 set(PWSERVER      ${pwserver_proj}   PARENT_SCOPE)
 set(PWSERVER_HOME ${install_dir}     PARENT_SCOPE)
 set(PWSERVER_LIB  ${install_dir}/lib PARENT_SCOPE)
-
