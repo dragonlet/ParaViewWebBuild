@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(CSE_WEB)
 
-set(PACKAGE_VERSION "2011-04-18")
+set(PACKAGE_VERSION "2011-05-02")
 
 # Enable testing and dashboard driving:
 #
@@ -25,13 +25,16 @@ set (TARBALL_SERVERS          "https://hsai-dev/tarballs" CACHE STRING "URL tarb
 set (TARBALLS_DIRS            $ENV{HOME}/tarballs ${CMAKE_SOURCE_DIR}/tarballs CACHE PATH "Source tarballs directories")
 set (DOWNLOAD_DIR             ${base}/Download CACHE PATH "Source package download directory")
 
-option(PV_DEV_BUILD "Build ParaView Development"   ON)
+option(PV_DEV_BUILD "Build ParaView Development"  OFF)
+option(PV_REL_BUILD "Build ParaView Release"       ON)
 option(PV_MESA      "Build ParaView with mesa OS" OFF)
 option(WITH_CSE     "Build with CSE"               ON)
 
 if ( CSE_HOME AND WITH_CSE)
     list(APPEND CMAKE_MODULE_PATH "${CSE_HOME}/Misc/CMake") 
     find_package(CSE)
+else ()
+    include(${CMAKE_SOURCE_DIR}/cmake/build.cmake)
 endif ()
 
 FIND_PACKAGE(Java)
@@ -147,10 +150,12 @@ ExternalProject_Add(${tomcat_proj}
   INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR> <INSTALL_DIR>
 )
 
-#add_subdirectory(paraview-release EXCLUDE_FROM_ALL)
-
 if (PV_DEV_BUILD)
     add_subdirectory(paraview-devel)
+endif()
+
+if (PV_REL_BUILD)
+    add_subdirectory(paraview-release)
 endif()
 
 add_subdirectory(pwsource)

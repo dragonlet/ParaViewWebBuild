@@ -44,7 +44,7 @@ ExternalProject_Add(${pwservice_proj}
 
 ExternalProject_Add_Step(${pwservice_proj} "deploy-war"
     #COMMAND /bin/pwd
-    COMMAND ${build_cmd} deploy
+    COMMAND ${BUILD_CMD} deploy
     WORKING_DIRECTORY <BINARY_DIR>
     DEPENDEES install
 )
