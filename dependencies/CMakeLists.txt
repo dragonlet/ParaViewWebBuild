@@ -8,21 +8,23 @@ find_program(apu_conf apu-1-config HINTS /usr/bin)
 
 if (apr_conf)
     execute_process( COMMAND ${apr_conf} --version
+                     OUTPUT_VARIABLE apr_ver
                      RESULT_VARIABLE apr_result
     )
 else(apr_conf)
-    set (apr_result "0.0.0")
+    set (apr_ver "0.0.0")
 endif(apr_conf)
 
 if (apu_conf)
     execute_process( COMMAND ${apu_conf} --version
+                     OUTPUT_VARIABLE apu_ver
                      RESULT_VARIABLE apu_result
     )
 else(apu_conf)
-    set (apu_result "0.0.0")
+    set (apu_ver "0.0.0")
 endif(apu_conf)
 
-if (${apr_result} LESS "1.3.0")
+if (${apr_ver} LESS "1.3.0")
     set(apr_name    "apr")
     set(apr_version "1.3.12")
     set(apr_proj    "${apr_name}-${apr_version}")
@@ -38,13 +40,10 @@ if (${apr_result} LESS "1.3.0")
       #BUILD_IN_SOURCE 1
       BUILD_COMMAND ${BUILD_CMD_SMP}
     )
-else ( ${apr_result} LESS "1.3.0")
-    execute_process( COMMAND ${apr_conf} --prefix
-                     RESULT_VARIABLE apr_prefix
-    )   
-endif ( ${apr_result} LESS "1.3.0")
+    set(apr_conf ${apr_prefix}/bin/apr-1-config CACHE FILEPATH "" FORCE)
+endif ()
 
-if (${apu_result} LESS "1.3.0")    
+if (${apu_ver} LESS "1.3.0")    
     set(apr_util_name    "apr-util")
     set(apr_util_version "1.3.9")
     set(apr_util_proj    "${apr_util_name}-${apr_util_version}")
@@ -62,15 +61,13 @@ if (${apu_result} LESS "1.3.0")
       BUILD_COMMAND ${BUILD_CMD_SMP}
       DEPENDS ${apr_proj}
     )
-else ( ${apu_result} LESS "1.3.0")
-    execute_process( COMMAND ${apu_conf} --prefix
-                     RESULT_VARIABLE apr_util_prefix
-    )   
-endif ( ${apu_result} LESS "1.3.0")
+    set(apu_conf ${apr_util_prefix}/bin/apu-1-config CACHE FILEPATH "" FORCE)
+endif ()
 
 # apache-activemq
 set(activemq_name      "activemq")
-set(activemq_version   "5.3.2")
+#set(activemq_version   "5.3.2")
+set(activemq_version   "5.5.0")
 set(activemq_proj      "${activemq_name}-${activemq_version}")
 set(activemq_prefix    "${CMAKE_INSTALL_PREFIX}/${activemq_proj}")
 set(activemq_url       "http://apache.fastbull.org/activemq/apache-${activemq_name}/${activemq_version}/apache-${activemq_proj}-bin.tar.gz")
@@ -86,7 +83,8 @@ ExternalProject_Add(${activemq_proj}
 set(ACTIVEMQ_PREFIX ${activemq_prefix} PARENT_SCOPE)
 
 set(activemq_cpp_name    "activemq-cpp")
-set(activemq_cpp_version "3.1.3")
+#set(activemq_cpp_version "3.1.3")
+set(activemq_cpp_version "3.4.0")
 set(activemq_cpp_proj    "${activemq_cpp_name}-${activemq_cpp_version}")
 set(activemq_cpp_prefix  "${CMAKE_INSTALL_PREFIX}")
 set(activemq_cpp_url     "http://mirror.atlanticmetro.net/apache/activemq/activemq-cpp/source/${activemq_cpp_name}-library-${activemq_cpp_version}-src.tar.gz")
@@ -97,8 +95,8 @@ ExternalProject_Add(${activemq_cpp_proj}
   INSTALL_DIR ${activemq_cpp_prefix}
   CONFIGURE_COMMAND <SOURCE_DIR>/configure
                     --prefix=<INSTALL_DIR>
-                    --with-apr=${apr_prefix}
-                    --with-apr-util=${apr_util_prefix}
+                    --with-apr=${apr_conf}
+                    --with-apr-util=${apu_conf}
   #BUILD_IN_SOURCE 1
   BUILD_COMMAND ${BUILD_CMD_SMP}
   #DEPENDS ${apr_util_proj}

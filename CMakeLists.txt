@@ -26,6 +26,7 @@ set (DOWNLOAD_DIR             ${base}/Download CACHE PATH "Source package downlo
 
 option(PV_DEV_BUILD   "Build ParaView Development"  OFF)
 option(PV_MESA        "Build ParaView with mesa OS"  ON)
+option(SYSTEM_MESA    "System Mesa"                  ON)
 option(WITH_CSE       "Build with CSE"              OFF)
 option(TOMCAT_INSTALL "Install with Tomcat"          ON)
 
