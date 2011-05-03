@@ -13,16 +13,16 @@ ExternalProject_Add(${pwserver_proj}
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
              -DCMAKE_BUILD_TYPE=Debug
              -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
-             -DACTIVEMQ_CPP:FILEPATH=${activemq_cpp_prefix}/lib/libactivemq-cpp.so
-             -DACTIVEMQ_INCLUDE_DIR:PATH=${activemq_cpp_prefix}/include/${activemq_cpp_proj}
+             -DACTIVEMQ_CPP:FILEPATH=${ACTIVEMQ_CPP_PREFIX}/lib/libactivemq-cpp.so
+             -DACTIVEMQ_INCLUDE_DIR:PATH=${ACTIVEMQ_CPP_PREFIX}/include/${ACTIVEMQ_CPP}
              -DBUILD_PW_SERVER:BOOL=ON
              -DBUILD_TESTING:BOOL=ON
              -DBUILD_WEB_SERVICE:BOOL=OFF
              -DParaView_DIR:PATH=${ParaView_DIR}
              -DCMAKE_MODULE_PATH:PATH=${ParaView_DIR}
-             -DCMAKE_INSTALL_RPATH:PATH=${pwserver_prefix}/lib::${ParaView_DIR}::${activemq_cpp_prefix}/lib::${PYTHON_LIBRARY_DIR}
+             -DCMAKE_INSTALL_RPATH:PATH=${pwserver_prefix}/lib::${ParaView_DIR}::${ACTIVEMQ_CPP_PREFIX}/lib::${PYTHON_LIBRARY_DIR}
   BUILD_COMMAND ${BUILD_CMD_SMP}
-  DEPENDS ${activemq_cpp_proj} ${PWSOURCE}
+  DEPENDS ${ACTIVEMQ_CPP} ${PWSOURCE}
 )
 
 ExternalProject_Get_Property(${pwserver_proj} source_dir binary_dir install_dir)
