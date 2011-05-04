@@ -123,7 +123,7 @@ if (NOT ANT_EXE)
 endif (NOT ANT_EXE)
 
 set(TOMCAT_PREFIX ${CMAKE_INSTALL_PREFIX}/tomcat CACHE PATH "Tomcat prefix" FORCE)
-if (INSTALL_TOMCAT)
+if (TOMCAT_INSTALL)
     set(tomcat_name    "tomcat")
     set(tomcat_version "6.0.32")
     set(tomcat_proj    "${tomcat_name}-${tomcat_version}")
@@ -137,4 +137,4 @@ if (INSTALL_TOMCAT)
       BUILD_COMMAND ""  
       INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR> <INSTALL_DIR>
     )
-endif (INSTALL_TOMCAT)
+endif (TOMCAT_INSTALL)
