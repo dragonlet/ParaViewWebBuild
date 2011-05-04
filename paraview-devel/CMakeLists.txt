@@ -21,7 +21,7 @@ set(pv_src_dev_dir   ${source_dir})
 
 message("Pavaview Git source: ${pv_src_dev_dir}")
 
-if (NOT PV_MESA)
+if (NOT PV_OSMESA)
 
     set(paraview_name    "paraview_devel")
     set(paraview_version "3.11")
@@ -63,7 +63,7 @@ if (NOT PV_MESA)
         DEPENDEES install
     )
 
-else (NOT PV_MESA)
+else (NOT PV_OSMESA)
 
     set(paraview_mesa_name    "paraview_mesa")
     set(paraview_mesa_version "3.11")
@@ -137,4 +137,4 @@ else (NOT PV_MESA)
     set(PV_DEV_MESA_LIB  ${install_dir}/lib/paraview-${paraview_mesa_version} PARENT_SCOPE)
     set(ParaView_DIR     ${install_dir}/lib/paraview-${paraview_version}      PARENT_SCOPE)
 
-endif (NOT PV_MESA)
+endif (NOT PV_OSMESA)

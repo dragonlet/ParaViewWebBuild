@@ -2,29 +2,31 @@
 # Packages
 #
 
-find_program(apr_conf apr-1-config HINTS /usr/bin)
-find_program(apu_conf apu-1-config HINTS /usr/bin)
+find_program(apr_conf_exe apr-1-config HINTS /usr/bin)
+find_program(apu_conf_exe apu-1-config HINTS /usr/bin)
 
+if (apr_conf_exe AND apu_conf_exe)
+    set(APR_FOUND  TRUE)
+endif()
 
-if (apr_conf)
-    execute_process( COMMAND ${apr_conf} --version
+if (APR_FOUND)
+    execute_process( COMMAND ${apr_conf_exe} --version
                      OUTPUT_VARIABLE apr_ver
                      RESULT_VARIABLE apr_result
     )
-else(apr_conf)
-    set (apr_ver "0.0.0")
-endif(apr_conf)
-
-if (apu_conf)
-    execute_process( COMMAND ${apu_conf} --version
+    execute_process( COMMAND ${apu_conf_exe} --version
                      OUTPUT_VARIABLE apu_ver
                      RESULT_VARIABLE apu_result
     )
-else(apu_conf)
+    set(apr_conf ${apr_conf_exe})
+    set(apu_conf ${apu_conf_exe})
+else(APR_FOUND)
+    set (apr_ver "0.0.0")
     set (apu_ver "0.0.0")
-endif(apu_conf)
+    set (apr_util_proj)
+endif(APR_FOUND)
 
-if (${apr_ver} LESS "1.3.0")
+if ("${apr_ver}" LESS "1.3.0")
     set(apr_name    "apr")
     set(apr_version "1.3.12")
     set(apr_proj    "${apr_name}-${apr_version}")
@@ -40,10 +42,10 @@ if (${apr_ver} LESS "1.3.0")
       #BUILD_IN_SOURCE 1
       BUILD_COMMAND ${BUILD_CMD_SMP}
     )
-    set(apr_conf ${apr_prefix}/bin/apr-1-config CACHE FILEPATH "" FORCE)
+    set(apr_conf ${apr_prefix}/bin/apr-1-config)
 endif ()
 
-if (${apu_ver} LESS "1.3.0")    
+if ("${apu_ver}" LESS "1.3.0")    
     set(apr_util_name    "apr-util")
     set(apr_util_version "1.3.9")
     set(apr_util_proj    "${apr_util_name}-${apr_util_version}")
@@ -61,7 +63,7 @@ if (${apu_ver} LESS "1.3.0")
       BUILD_COMMAND ${BUILD_CMD_SMP}
       DEPENDS ${apr_proj}
     )
-    set(apu_conf ${apr_util_prefix}/bin/apu-1-config CACHE FILEPATH "" FORCE)
+    set(apu_conf ${apr_util_prefix}/bin/apu-1-config)
 endif ()
 
 # apache-activemq
@@ -97,13 +99,13 @@ ExternalProject_Add(${activemq_cpp_proj}
                     --with-apr-util=${apu_conf}
   #BUILD_IN_SOURCE 1
   BUILD_COMMAND ${BUILD_CMD_SMP}
-  #DEPENDS ${apr_util_proj}
+  DEPENDS ${apr_util_proj}
 )
 set(ACTIVEMQ_CPP ${activemq_cpp_proj}          PARENT_SCOPE)
 set(ACTIVEMQ_CPP_PREFIX ${activemq_cpp_prefix} PARENT_SCOPE)
 
-find_program (ANT_EXE ant /usr/bin)
-if (NOT ANT_EXE)
+find_program (ANT_SYS_EXE ant /usr/bin)
+if (NOT ANT_SYS_EXE)
     set(ant_name    "ant")
     set(ant_version "1.8.2")
     set(ant_proj    "${ant_name}-${ant_version}")
@@ -120,7 +122,9 @@ if (NOT ANT_EXE)
     )
     set(ANT_PREFIX ${ant_prefix}         PARENT_SCOPE)
     set(ANT_EXE    ${ant_prefix}/bin/ant CACHE FILEPATH "Path to ant executable" FORCE)
-endif (NOT ANT_EXE)
+else (NOT ANT_SYS_EXE)
+    set(ANT_EXE    ${ANT_SYS_EXE} CACHE FILEPATH "Path to ant executable" FORCE)
+endif (NOT ANT_SYS_EXE)
 
 set(TOMCAT_PREFIX ${CMAKE_INSTALL_PREFIX}/tomcat CACHE PATH "Tomcat prefix" FORCE)
 if (TOMCAT_INSTALL)

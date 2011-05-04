@@ -22,9 +22,9 @@ set(PV_SRC_REL_VER   ${paraview_src_version} PARENT_SCOPE)
 set(PV_SRC_REL_HOME  ${source_dir}           PARENT_SCOPE)
 set(pv_src_rel_dir   ${source_dir})
 
-message("Pavaview Git source: ${pv_src_rel_dir}")
+message(STATUS "Pavaview source: ${pv_src_rel_dir}")
 
-if (NOT PV_MESA)
+if (NOT PV_OSMESA)
 
     set(paraview_name    "paraview")
     set(paraview_version "3.10")
@@ -39,7 +39,7 @@ if (NOT PV_MESA)
       CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
                  -DCMAKE_BUILD_TYPE=Debug
                  -DCMAKE_VERBOSE_MAKEFILE=OFF
-                 -DCMAKE_INSTALL_RPATH:PATH=${PYTHON_LIBRARY_DIR}::${paraview_prefix}/lib::${paraview_prefix}/lib/paraview-${paraview_version}
+                 -DCMAKE_INSTALL_RPATH:PATH=${PYTHON_LIBRARY_DIR}::${paraview_prefix}/lib/paraview-${paraview_version}
                  -DBUILD_SHARED_LIBS=ON
                  -DPARAVIEW_ENABLE_PYTHON=ON
                  -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
@@ -64,7 +64,7 @@ if (NOT PV_MESA)
         DEPENDEES install
     )
 
-else (NOT PV_MESA)
+else (NOT PV_OSMESA)
 
     set(paraview_mesa_name    "paraview_mesa")
     set(paraview_mesa_version "3.10")
@@ -163,4 +163,4 @@ else (NOT PV_MESA)
     set(PV_REL_MESA_HOME ${install_dir}        PARENT_SCOPE)
     set(PV_REL_MESA_LIB  ${install_dir}/lib/paraview-${paraview_mesa_version} PARENT_SCOPE)
     set(ParaView_DIR     ${install_dir}/lib/paraview-${paraview_mesa_version}      PARENT_SCOPE)
-endif (NOT PV_MESA)
+endif (NOT PV_OSMESA)

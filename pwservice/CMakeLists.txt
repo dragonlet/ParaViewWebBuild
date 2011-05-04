@@ -52,6 +52,7 @@ ExternalProject_Add_Step(${pwservice_proj} "install-scripts"
     COMMAND ${CMAKE_COMMAND} -DINSTALL_DIR=${CMAKE_INSTALL_PREFIX}
                              -DParaView_DIR=${ParaView_DIR}
                              -DPYTHON_HOME=${PYTHON_HOME}
+                             -DJAVA_HOME=${JAVA_HOME}
                              -P scripts.cmake
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPENDEES install
