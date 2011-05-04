@@ -40,6 +40,10 @@ else ()
 endif ()
 
 FIND_PACKAGE(Java)
+if (Java_FOUND)
+    string(REPLACE "/bin/java" "" JAVA_HOME "${Java_JAVA_EXECUTABLE}")
+endif (Java_FOUND)
+
 FIND_PACKAGE(PythonInterp)
 FIND_PACKAGE(PythonLibs)
 get_filename_component(PYTHON_LIBRARY_DIR  ${PYTHON_LIBRARY} PATH)

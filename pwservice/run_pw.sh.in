@@ -10,7 +10,7 @@ export PWSERVICE_HOME=$PVWEB_HOME/PWService
 export ANT_HOME=$PVWEB_HOME/ant
 export PYTHON_HOME=@PYTHON_HOME@
 export PYTHONPATH=$PV_LIB_DIR/site-packages
-export JAVA_HOME=/usr/java/jdk6-64
+export JAVA_HOME=@JAVA_HOME@
 export ACTIVEMQ_HOME=$PVWEB_HOME/activemq-5.3.2
 
 export PATH=$PVWEB_HOME/bin:TOMCAT_HOME/bin:$ACTIVEMQ_HOME/bin:$PWSERVICE_HOME/bin:${PV_BIN}:$ANT_HOME/bin:$PYTHON_HOME/bin:$JAVA_HOME/bin:/usr/bin:/bin
