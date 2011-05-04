@@ -20,7 +20,8 @@ set_property(DIRECTORY PROPERTY EP_BASE ${base})
 
 set (CMAKE_INSTALL_PREFIX     $ENV{HOME}/PVWeb CACHE PATH "Package Install Path" FORCE)
 set (CMAKE_BUILD_TYPE         "Debug" CACHE STRING "Type of Build" FORCE)
-set (TARBALL_SERVERS          "https://hsai-dev/tarballs" CACHE STRING "URL tarballs server")
+#set (TARBALL_SERVERS          "https://hsai-dev/tarballs" CACHE STRING "URL tarballs server")
+set (TARBALL_SERVERS          "https://github.com/ktkirk/tarballs/raw/master" CACHE STRING "URL tarballs server")
 set (TARBALLS_DIRS            $ENV{HOME}/tarballs ${CMAKE_SOURCE_DIR}/tarballs CACHE PATH "Source tarballs directories")
 set (DOWNLOAD_DIR             ${base}/Download CACHE PATH "Source package download directory")
 

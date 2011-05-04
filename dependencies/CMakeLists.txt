@@ -66,8 +66,7 @@ endif ()
 
 # apache-activemq
 set(activemq_name      "activemq")
-#set(activemq_version   "5.3.2")
-set(activemq_version   "5.5.0")
+set(activemq_version   "5.3.2")
 set(activemq_proj      "${activemq_name}-${activemq_version}")
 set(activemq_prefix    "${CMAKE_INSTALL_PREFIX}/${activemq_proj}")
 set(activemq_url       "http://apache.fastbull.org/activemq/apache-${activemq_name}/${activemq_version}/apache-${activemq_proj}-bin.tar.gz")
@@ -83,8 +82,7 @@ ExternalProject_Add(${activemq_proj}
 set(ACTIVEMQ_PREFIX ${activemq_prefix} PARENT_SCOPE)
 
 set(activemq_cpp_name    "activemq-cpp")
-#set(activemq_cpp_version "3.1.3")
-set(activemq_cpp_version "3.4.0")
+set(activemq_cpp_version "3.1.3")
 set(activemq_cpp_proj    "${activemq_cpp_name}-${activemq_cpp_version}")
 set(activemq_cpp_prefix  "${CMAKE_INSTALL_PREFIX}")
 set(activemq_cpp_url     "http://mirror.atlanticmetro.net/apache/activemq/activemq-cpp/source/${activemq_cpp_name}-library-${activemq_cpp_version}-src.tar.gz")
