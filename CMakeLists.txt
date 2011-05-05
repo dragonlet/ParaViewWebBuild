@@ -31,7 +31,7 @@ option(SYSTEM_MESA    "System Mesa"                  OFF)
 option(WITH_CSE       "Build with CSE"               OFF)
 option(TOMCAT_INSTALL "Install with Tomcat"           ON)
 
-if ( CSE_HOME AND WITH_CSE)
+if (WITH_CSE)
     find_path(CSE_HOME Release    $ENV{CSE_HOME} /usr/cta/CSE $ENV{HOME}/CSE)
     list(APPEND CMAKE_MODULE_PATH "${CSE_HOME}/Misc/CMake") 
     find_package(CSE)
