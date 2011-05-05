@@ -26,8 +26,8 @@ set (TARBALLS_DIRS            $ENV{HOME}/tarballs ${CMAKE_SOURCE_DIR}/tarballs C
 set (DOWNLOAD_DIR             ${base}/Download CACHE PATH "Source package download directory")
 
 option(PV_DEV_BUILD   "Build ParaView Development"   OFF)
-option(PV_OSMESA      "Build ParaView with mesa OS"   ON)
-option(SYSTEM_MESA    "System Mesa"                   ON)
+option(PV_OSMESA      "Build ParaView with mesa OS"  OFF)
+option(SYSTEM_MESA    "System Mesa"                  OFF)
 option(WITH_CSE       "Build with CSE"               OFF)
 option(TOMCAT_INSTALL "Install with Tomcat"           ON)
 

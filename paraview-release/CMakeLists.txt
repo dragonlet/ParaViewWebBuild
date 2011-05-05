@@ -3,7 +3,7 @@ set(paraview_src_name    "paraview_src")
 set(paraview_src_version "3.10.1")
 set(paraview_src_proj    "${paraview_src_name}-${paraview_src_version}")
 set(paraview_src_git     "git://paraview.org/ParaView.git")
-set(paraview_src_url     "http://paraview.org/files/v3.10/ParaView-3.10.1.tar.gz")
+set(paraview_src_url     "http://paraview.org/files/v3.10/ParaView-${paraview_src_version}.tar.gz")
 CheckMirrors(${paraview_src_proj} ${paraview_src_url})
 
 ExternalProject_Add(${paraview_src_proj}
