@@ -31,7 +31,7 @@ ExternalProject_Add(${pwservice_proj}
              -DCORE_SERVICE_URL="http://localhost:8585/PWService"
              -DFLEX_HOME:PATH=${FLEX_SDK_PREFIX}
              -DLOGGING_LEVEL=ERROR
-             -DLOG_PARAVIEW:BOOL=OFF
+             -DLOG_PARAVIEW:BOOL=ON
              -DLOG_PARAWEB:BOOL=ON
              -DPV_ADAPTER_EXEC:PATH=${PWSERVER_HOME}/bin/PWServer
              -DTOMCAT_HOME:PATH=${TOMCAT_PREFIX}
