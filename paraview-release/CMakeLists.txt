@@ -47,8 +47,11 @@ if (NOT PV_OSMESA)
                  -DPYTHON_LIBRARY=${PYTHON_LIBRARY}
                  -DPARAVIEW_BUILD_QT_GUI=OFF
                  -DPARAVIEW_INSTALL_DEVELOPMENT=ON
+                 -PARAVIEW_BUILD_PLUGIN_Manta=ON
+                 -DMANTA_BUILD=${MANTA_BUILD}
+                 -DMANTA_SOURCE=${MANTA_SOURCE}
       BUILD_COMMAND ${BUILD_CMD_SMP}
-      DEPENDS ${paraview_src_proj}
+      DEPENDS ${paraview_src_proj} ${MANTA}
     )
     
     ExternalProject_Get_Property(${paraview_proj} source_dir binary_dir install_dir)

@@ -60,6 +60,7 @@ set (ENV{CMAKE_PREFIX_PATH}  "${CMAKE_INSTALL_PREFIX}:${PYTHON_HOME}:$ENV{HOME}/
 include(${CMAKE_SOURCE_DIR}/cmake/macros.cmake)
 
 add_subdirectory(dependencies)
+add_subdirectory(manta)
 
 if (PV_DEV_BUILD)
     add_subdirectory(paraview-devel)
