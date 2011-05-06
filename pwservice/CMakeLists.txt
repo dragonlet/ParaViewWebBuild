@@ -3,6 +3,7 @@ set(pwservice_name    "PWService")
 set(pwservice_version ${PWSOURCE_VER})
 set(pwservice_proj    "${pwservice_name}-${pwservice_version}")
 set(pwservice_prefix  "${CMAKE_INSTALL_PREFIX}/${pwservice_name}")
+set(WORKING_DIR       "${CMAKE_INSTALL_PREFIX}/var/ParaViewWeb/")
 
 ExternalProject_Add(${pwservice_proj}
   DOWNLOAD_COMMAND ""
@@ -39,7 +40,7 @@ ExternalProject_Add(${pwservice_proj}
              -DParaView_DIR:PATH=${ParaView_DIR}
              -DCMAKE_MODULE_PATH:PATH=${ParaView_DIR}
              -DCMAKE_INSTALL_RPATH:PATH=${pwservice_prefix}/lib::${ParaView_DIR}::${ACTIVEMQ_CPP_PREFIX}/lib::${PYTHON_LIBRARY_DIR}
-             -DWORKING_DIR=<INSTALL_DIR>/PW-work/
+             -DWORKING_DIR=${WORKING_DIR}
   BUILD_COMMAND ${BUILD_CMD_SMP}  
   DEPENDS ${PWSERVER} ${FLEX_SDK} ${GWT} ${ACTIVEMQ_CPP} ${QOOXDOO}
 )
@@ -55,6 +56,10 @@ ExternalProject_Add_Step(${pwservice_proj} "install-scripts"
                              -DParaView_DIR=${ParaView_DIR}
                              -DPYTHON_HOME=${PYTHON_HOME}
                              -DJAVA_HOME=${JAVA_HOME}
+                             -DPV_SRV_EXE=${ParaView_HOME}/bin/pvserver
+                             -DPW_SRV_EXE=${PWSERVER_HOME}/bin/PWServer
+                             -DMANTA_LIB=${MANTA_LIB}
+                             -DWORKING_DIR=${WORKING_DIR}
                              -P scripts.cmake
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPENDEES install

@@ -59,7 +59,8 @@ if (NOT PV_OSMESA)
     set(PV_RELEASE      ${paraview_proj} PARENT_SCOPE)
     set(PV_RELEASE_HOME ${install_dir}   PARENT_SCOPE)
     set(PV_RELEASE_LIB  ${install_dir}/lib/paraview-${paraview_version} PARENT_SCOPE)
-    set(ParaView_DIR  ${install_dir}/lib/paraview-${paraview_version}   PARENT_SCOPE)
+    set(ParaView_HOME   ${install_dir}   PARENT_SCOPE)
+    set(ParaView_DIR    ${install_dir}/lib/paraview-${paraview_version}   PARENT_SCOPE)
     
     ExternalProject_Add_Step(${paraview_proj} "install-hfile"
         COMMAND ${CMAKE_COMMAND} -E copy "${source_dir}/Utilities/VTKPythonWrapping/Executable/vtkPVPythonInterpretor.h"
@@ -165,5 +166,6 @@ else (NOT PV_OSMESA)
     set(PV_REL_MESA      ${paraview_mesa_proj} PARENT_SCOPE)
     set(PV_REL_MESA_HOME ${install_dir}        PARENT_SCOPE)
     set(PV_REL_MESA_LIB  ${install_dir}/lib/paraview-${paraview_mesa_version} PARENT_SCOPE)
+    set(ParaView_HOME    ${install_dir}        PARENT_SCOPE)
     set(ParaView_DIR     ${install_dir}/lib/paraview-${paraview_mesa_version}      PARENT_SCOPE)
 endif (NOT PV_OSMESA)

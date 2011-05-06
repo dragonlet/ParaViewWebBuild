@@ -35,7 +35,7 @@ ExternalProject_Add(${manta_proj}
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
              -DCMAKE_BUILD_TYPE=Debug
              -DCMAKE_VERBOSE_MAKEFILE=OFF
-             -DCMAKE_INSTALL_RPATH:PATH=${PYTHON_LIBRARY_DIR}::${manta_prefix}/lib/manta-${manta_version}
+             -DCMAKE_INSTALL_RPATH:PATH=${manta_prefix}/lib
              -DBUILD_SHARED_LIBS=ON
   BUILD_COMMAND ${BUILD_CMD_SMP}
   INSTALL_COMMAND ""
