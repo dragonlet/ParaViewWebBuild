@@ -1,0 +1,29 @@
+import pwsimple
+import os
+import threading
+
+buildDir = '@ParaView_DIR@'
+
+class StartServerThread ( threading.Thread ):
+  def run( self ):
+    os.system(buildDir + '/../../bin/pvserver')
+
+def startServer():
+  # Start pvserver
+  StartServerThread().start();
+
+def connectToServer():
+  # Connect to pvserver
+  pwsimple.Connect("localhost")
+
+def loadManta():
+  # Load manta plugins
+  pwsimple.LoadPlugin(buildDir+"/libMantaView.so", False)# client
+  pwsimple.LoadPlugin(buildDir+"/libMantaView.so", True) # server
+
+def createMantaView():
+  # Configure the manta view
+  view = pwsimple._create_view("MantaIceTDesktopRenderView")
+  view.Threads = 8
+  view.ViewSize = [1024,1024]
+  return view
