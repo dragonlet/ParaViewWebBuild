@@ -49,7 +49,7 @@ set(MANTA_HOME  ${install_dir}      PARENT_SCOPE)
 set(MANTA_BUILD ${binary_dir}       PARENT_SCOPE)
 set(MANTA_LIB   ${install_dir}/lib  PARENT_SCOPE)
 
-ExternalProject_Add_Step(${paraview_proj} "install-manta"
+ExternalProject_Add_Step(${manta_proj} "install-manta"
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${binary_dir}/bin ${install_dir}
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${binary_dir}/lib ${install_dir}
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${binary_dir}/include ${install_dir}
