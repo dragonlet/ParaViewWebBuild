@@ -39,7 +39,7 @@ if (NOT PV_OSMESA)
       CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
                  -DCMAKE_BUILD_TYPE=Debug
                  -DCMAKE_VERBOSE_MAKEFILE=OFF
-                 -DCMAKE_INSTALL_RPATH:PATH=${PYTHON_LIBRARY_DIR}::${paraview_prefix}/lib/paraview-${paraview_version}
+                 -DCMAKE_INSTALL_RPATH:PATH=${PYTHON_LIBRARY_DIR}::${paraview_prefix}/lib/paraview-${paraview_version}::${MANTA_LIB}
                  -DBUILD_SHARED_LIBS=ON
                  -DPARAVIEW_ENABLE_PYTHON=ON
                  -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
@@ -47,9 +47,9 @@ if (NOT PV_OSMESA)
                  -DPYTHON_LIBRARY=${PYTHON_LIBRARY}
                  -DPARAVIEW_BUILD_QT_GUI=OFF
                  -DPARAVIEW_INSTALL_DEVELOPMENT=ON
-                 -PARAVIEW_BUILD_PLUGIN_Manta=ON
-                 -DMANTA_BUILD=${MANTA_BUILD}
-                 -DMANTA_SOURCE=${MANTA_SOURCE}
+                 -DPARAVIEW_BUILD_PLUGIN_Manta=ON
+                 -DMANTA_BUILD:PATH=${MANTA_BUILD}
+                 -DMANTA_SOURCE:PATH=${MANTA_SOURCE}
       BUILD_COMMAND ${BUILD_CMD_SMP}
       DEPENDS ${paraview_src_proj} ${MANTA}
     )

@@ -17,6 +17,8 @@ ExternalProject_Add(${pwservice_proj}
              -DBUILD_WEB_SAMPLES:BOOL=ON
              -DBUILD_SANDBOX_SAMPLE:BOOL=ON
              -DBUILD_CONSOLE_SAMPLE:BOOL=ON
+             -DBUILD_FLEX_RENDERER:BOOL=ON
+             -DBUILD_MANTA_SAMPLE:BOOL=ON
              -DANT_EXECUTABLE:FILEPATH=${ANT_EXE}
              -DGWT_SDK_HOME:PATH=${GWT_PREFIX}
              -DQOOXDOO_SDK_PATH:PATH=${QOOXDOO_PREFIX}
