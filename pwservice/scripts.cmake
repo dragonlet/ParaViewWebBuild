@@ -14,8 +14,8 @@ file(COPY findPort.sh manta-init.py DESTINATION ${INSTALL_DIR}/bin)
 configure_file( manta.sh.in
                 ${INSTALL_DIR}/bin/manta.sh @ONLY)
                 
-configure_file( MantaLoader.py.in
+configure_file( plugins/MantaLoader.py.in
                 ${WORKING_DIR}/plugins/MantaLoader.py @ONLY)
 
-configure_file( Calc.py
+configure_file( plugins/Calc.py
                 ${WORKING_DIR}/plugins/Calc.py COPYONLY)
