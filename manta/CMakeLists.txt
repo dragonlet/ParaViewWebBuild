@@ -3,13 +3,13 @@ set(manta_src_name    "manta_src")
 set(manta_src_version "svn")
 set(manta_src_proj    "${manta_src_name}-${manta_src_version}")
 set(manta_src_svn     "https://gforge.sci.utah.edu/svn/Manta/trunk")
-#set(manta_src_url     "Manta-${manta_src_version}.tar.gz")
-#CheckMirrors(${manta_src_proj} ${manta_src_url})
+set(manta_src_url     "${manta_src_proj}-r2507.tar.bz2")
+CheckMirrors(${manta_src_proj} ${manta_src_url})
 
 ExternalProject_Add(${manta_src_proj}
-  SVN_REPOSITORY ${manta_src_svn}
+  #SVN_REPOSITORY ${manta_src_svn}
   #SVN_REVISION 
-  #URL ${${manta_src_proj}_pkg}
+  URL ${${manta_src_proj}_pkg}
   CONFIGURE_COMMAND ""
   BUILD_COMMAND ""
   INSTALL_COMMAND ""
