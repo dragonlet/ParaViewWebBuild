@@ -2,3 +2,18 @@
 
 CMake scripts to build ParaViewWeb
 
+Get Source:
+
+  git clone http://github.com/ktkirk/ParaViewWebBuild.git
+  cd ParaViewWebBuild
+  git submodule update
+
+Install:
+
+  mkdir build; cd build
+  ccmake -DPVWEB_INSTALL_PREFIX=$HOME/PVWeb ..
+  make
+  
+  with CSE
+  
+  ccmake -DPVWEB_INSTALL_PREFIX=$HOME/PVWeb -DWITH_CSE=YES ..

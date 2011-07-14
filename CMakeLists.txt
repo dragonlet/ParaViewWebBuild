@@ -23,7 +23,7 @@ set (CMAKE_INSTALL_PREFIX     ${PVWEB_INSTALL_PREFIX} CACHE INTERNAL "" FORCE)
 set (CMAKE_BUILD_TYPE         "Debug" CACHE STRING "Type of Build" FORCE)
 #set (TARBALL_SERVERS          "https://hsai-dev/tarballs" CACHE STRING "URL tarballs server")
 set (TARBALL_SERVERS          "http://github.com/ktkirk/tarballs/raw/master" CACHE STRING "URL tarballs server")
-set (TARBALLS_DIRS            $ENV{HOME}/tarballs ${CMAKE_SOURCE_DIR}/tarballs CACHE PATH "Source tarballs directories")
+set (TARBALLS_DIRS            ${CMAKE_SOURCE_DIR}/tarballs $ENV{HOME}/tarballs CACHE PATH "Source tarballs directories")
 set (DOWNLOAD_DIR             ${base}/Download CACHE PATH "Source package download directory")
 
 option(PV_DEV_BUILD   "Build ParaView Development"    OFF)
