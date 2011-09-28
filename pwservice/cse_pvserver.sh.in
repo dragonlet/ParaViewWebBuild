@@ -1,0 +1,17 @@
+#!/bin/bash
+set -x
+
+export PVWEB_HOME=@PVWEB_HOME@
+export DISPLAY=:0
+
+# Uses CSE Paraview
+source @CSE_HOME@/modules/init/bash
+module load cseinit cse/paraview
+module list
+
+port=$1
+
+# PWServer
+which pvserver
+pvserver --use-offscreen-rendering --server-port=${port}
+

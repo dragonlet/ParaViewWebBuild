@@ -1,0 +1,15 @@
+#!/bin/bash
+set -x
+
+export PVWEB_HOME=@PVWEB_HOME@
+export PV_SRV_EXE=@PV_SRV_EXE@
+export ParaView_DIR=@ParaView_DIR@
+
+export LD_LIBRARY_PATH=${ParaView_DIR}/..:${LD_LIBRARY_PATH}
+export DISPLAY=:0
+
+port=$1
+
+# PWServer
+${PV_SRV_EXE} --use-offscreen-rendering --server-port=${port}
+

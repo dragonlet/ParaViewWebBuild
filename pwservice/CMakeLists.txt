@@ -55,6 +55,7 @@ ExternalProject_Add_Step(${pwservice_proj} "install-scripts"
     COMMAND ${CMAKE_COMMAND} -DINSTALL_DIR=${CMAKE_INSTALL_PREFIX}
                              -DParaView_DIR=${ParaView_DIR}
                              -DPYTHON_HOME=${PYTHON_HOME}
+                             -DCSE_HOME=${CSE_HOME}
                              -DJAVA_HOME=${JAVA_HOME}
                              -DPV_SRV_EXE=${ParaView_HOME}/bin/pvserver
                              -DPW_SRV_EXE=${PWSERVER_HOME}/bin/PWServer

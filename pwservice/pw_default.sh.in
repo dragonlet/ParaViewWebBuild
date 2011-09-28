@@ -1,0 +1,26 @@
+#!/bin/bash
+set -x
+
+export PVWEB_HOME=@PVWEB_HOME@
+export PV_SRV_EXE=${PVWEB_HOME}/bin/pw_pvserver.sh
+export PW_SRV_EXE=@PW_SRV_EXE@
+export ParaView_DIR=@ParaView_DIR@
+export MANTA_LIB=@MANTA_LIB@
+
+export LD_LIBRARY_PATH=${ParaView_DIR}/..:${LD_LIBRARY_PATH}
+
+export DISPLAY=:0
+#export -n DISPLAY
+
+port=$(${PVWEB_HOME}/bin/findPort.sh)
+
+# pvserver
+echo "Starting CSE pvserver..."
+${PV_SRV_EXE} ${port} &
+sleep 3
+
+# PWServer
+echo -e "\nStarting PWserver..."
+#ldd ${PW_SRV_EXE} | grep GL
+#${PW_SRV_EXE} --use-offscreen-rendering --server-hostname=localhost --server-port=${port} $1 $2 $3 $4 $5 $6 $7 $8
+${PW_SRV_EXE} --server-hostname=localhost --server-port=${port} $1 $2 $3 $4 $5 $6 $7 $8
