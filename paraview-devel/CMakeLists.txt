@@ -22,12 +22,13 @@ set(pv_src_dev_dir   ${source_dir})
 
 message("Pavaview Git source: ${pv_src_dev_dir}")
 
+set(paraview_version "3.12")
+
 if (NOT PV_OSMESA)
 
     set(paraview_name    "paraview_devel")
-    set(paraview_version "3.11")
-    set(paraview_proj    "${paraview_name}-${paraview_version}")
-    set(paraview_prefix  "${CMAKE_INSTALL_PREFIX}/pv-${paraview_version}")
+    set(paraview_proj    "${paraview_name}-${paraview_src_version}")
+    set(paraview_prefix  "${CMAKE_INSTALL_PREFIX}/pv-${paraview_src_version}")
     
     ExternalProject_Add(${paraview_proj}
       #GIT_REPOSITORY ${paraview_src_git}
@@ -38,7 +39,7 @@ if (NOT PV_OSMESA)
       CMAKE_GENERATOR "${CMAKE_GENERATOR}"
       CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
                  -DCMAKE_BUILD_TYPE=Debug
-                 -DCMAKE_VERBOSE_MAKEFILE=OFF
+                 -DCMAKE_VERBOSE_MAKEFILE=ON
                  -DCMAKE_INSTALL_RPATH:PATH=${PYTHON_LIBRARY_DIR}::${paraview_prefix}/lib::${paraview_prefix}/lib/paraview-${paraview_version}
                  -DBUILD_SHARED_LIBS=ON
                  -DPARAVIEW_ENABLE_PYTHON=ON
@@ -67,9 +68,8 @@ if (NOT PV_OSMESA)
 else (NOT PV_OSMESA)
 
     set(paraview_mesa_name    "paraview_mesa")
-    set(paraview_mesa_version "3.11")
-    set(paraview_mesa_proj    "${paraview_mesa_name}-${paraview_mesa_version}")
-    set(paraview_mesa_prefix  "${CMAKE_INSTALL_PREFIX}/pv_mesa-${paraview_version}")
+    set(paraview_mesa_proj    "${paraview_mesa_name}-${paraview_src_version}")
+    set(paraview_mesa_prefix  "${CMAKE_INSTALL_PREFIX}/pv_mesa-${paraview_src_version}")
     
     set(mesa_name    "mesa")
     set(mesa_version "7.10.3")
@@ -104,8 +104,8 @@ else (NOT PV_OSMESA)
       CMAKE_GENERATOR "${CMAKE_GENERATOR}"
       CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
                  -DCMAKE_BUILD_TYPE=Debug
-                 -DCMAKE_VERBOSE_MAKEFILE=OFF
-                 -DCMAKE_INSTALL_RPATH:PATH=${PYTHON_LIBRARY_DIR}::${mesa_prefix}/lib::${paraview_mesa_prefix}/lib/paraview-${paraview_mesa_version}
+                 -DCMAKE_VERBOSE_MAKEFILE=ON
+                 -DCMAKE_INSTALL_RPATH:PATH=${PYTHON_LIBRARY_DIR}::${mesa_prefix}/lib::${paraview_mesa_prefix}/lib/paraview-${paraview_version}
                  -DBUILD_SHARED_LIBS=ON
                  -DPARAVIEW_ENABLE_PYTHON=ON
                  -DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}
@@ -117,13 +117,13 @@ else (NOT PV_OSMESA)
                  -DVTK_USE_DISPLAY=OFF
                  -DVTK_OPENGL_HAS_OSMESA=ON
                  -DVTK_USE_OFFSCREEN=ON
-                 -DVTK_USE_X=OFF
                  -DOPENGL_INCLUDE_DIR:PATH=${mesa_prefix}/include
                  -DOPENGL_xmesa_INCLUDE_DIR:PATH=${mesa_prefix}/include
                  -DOPENGL_gl_LIBRARY:FILEPATH=${mesa_prefix}/lib/libGL.so
                  -DOPENGL_glu_LIBRARY:FILEPATH=${mesa_prefix}/lib/libGLU.so
                  -DOSMESA_INCLUDE_DIR:PATH=${mesa_prefix}/include
                  -DOSMESA_LIBRARY:FILEPATH=${mesa_prefix}/lib/libOSMesa.so
+                 #-DVTK_USE_X=OFF
       BUILD_COMMAND ${BUILD_CMD_SMP}
       DEPENDS ${mesa_proj} ${paraview_src_proj}
     )
@@ -138,7 +138,7 @@ else (NOT PV_OSMESA)
     
     set(PV_DEV_MESA      ${paraview_mesa_proj} PARENT_SCOPE)
     set(PV_DEV_MESA_HOME ${install_dir}        PARENT_SCOPE)
-    set(PV_DEV_MESA_LIB  ${install_dir}/lib/paraview-${paraview_mesa_version} PARENT_SCOPE)
+    set(PV_DEV_MESA_LIB  ${install_dir}/lib/paraview-${paraview_version}      PARENT_SCOPE)
     set(ParaView_DIR     ${install_dir}/lib/paraview-${paraview_version}      PARENT_SCOPE)
 
 endif (NOT PV_OSMESA)
