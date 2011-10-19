@@ -29,7 +29,7 @@ ExternalProject_Add(${pwservice_proj}
              -DACTIVEMQ_CPP:FILEPATH=${ACTIVEMQ_CPP_PREFIX}/lib/libactivemq-cpp.so
              -DACTIVEMQ_INCLUDE_DIR=${ACTIVEMQ_CPP_PREFIX}/include/${ACTIVEMQ_CPP}
              -DCORE_CTX_ROOT=PWService
-             -DCORE_SERVICE_URL="http://localhost:8585/PWService"
+             -DCORE_SERVICE_URL="http://localhost:8080/PWService"
              -DFLEX_HOME:PATH=${FLEX_SDK_PREFIX}
              -DLOGGING_LEVEL=ERROR
              -DLOG_PARAVIEW:BOOL=ON

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export PVWEB_HOME=@PVWEB_HOME@
+XINIT_LOG=${PVWEB_HOME}/var/xinit-$(hostname -s).log
+
+/usr/bin/xinit 2> $XINIT_LOG &
+#xdpyinfo -display :0 | head -7
+glxinfo -display :0 | head -5
+
+
