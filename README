@@ -6,7 +6,7 @@ Get Source:
 
   git clone http://github.com/ktkirk/ParaViewWebBuild.git
   cd ParaViewWebBuild
-  git submodule update
+  git submodule update --init
 
 Install:
 
