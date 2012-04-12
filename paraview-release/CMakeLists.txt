@@ -1,9 +1,12 @@
 
 set(paraview_src_name    "paraview_src")
-set(paraview_src_version "3.10.1")
-set(paraview_src_proj    "${paraview_src_name}-${paraview_src_version}")
+#set(paraview_src_version "3.10.1")
+set(paraview_src_version "3.14")
+set(paraview_src_patch   "1")
+set(paraview_src_proj    "${paraview_src_name}-${paraview_src_version}.${paraview_src_patch}")
 set(paraview_src_git     "git://paraview.org/ParaView.git")
-set(paraview_src_url     "http://paraview.org/files/v3.10/ParaView-${paraview_src_version}.tar.gz")
+#set(paraview_src_url     "http://paraview.org/files/v${paraview_src_version}/ParaView-${paraview_src_version}.${paraview_src_patch}.tar.gz")
+set(paraview_src_url     "http://paraview.org/files/v${paraview_src_version}/ParaView-${paraview_src_version}.${paraview_src_patch}-Source.tar.gz")
 CheckMirrors(${paraview_src_proj} ${paraview_src_url})
 
 ExternalProject_Add(${paraview_src_proj}
@@ -27,7 +30,7 @@ message(STATUS "Pavaview source: ${pv_src_rel_dir}")
 if (NOT PV_OSMESA)
 
     set(paraview_name    "paraview")
-    set(paraview_version "3.10")
+    set(paraview_version ${paraview_src_version})
     set(paraview_proj    "${paraview_name}-${paraview_src_version}")
     set(paraview_prefix  "${CMAKE_INSTALL_PREFIX}/pv-${paraview_version}")
     
@@ -36,18 +39,29 @@ if (NOT PV_OSMESA)
       SOURCE_DIR  ${pv_src_rel_dir}
       INSTALL_DIR ${paraview_prefix} 
       CMAKE_GENERATOR "${CMAKE_GENERATOR}"
-      CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
-                 -DCMAKE_BUILD_TYPE=Debug
-                 -DCMAKE_VERBOSE_MAKEFILE=OFF
+      CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+                 -DCMAKE_BUILD_TYPE:STRING=Debug
+                 -DBUILD_SHARED_LIBS:BOOL=ON
+                 -DCMAKE_VERBOSE_MAKEFILE:BOOL=OFF
                  -DCMAKE_INSTALL_RPATH:PATH=${PYTHON_LIBRARY_DIR}::${paraview_prefix}/lib/paraview-${paraview_version}::${MANTA_LIB}
-                 -DBUILD_SHARED_LIBS=ON
-                 -DPARAVIEW_ENABLE_PYTHON=ON
-                 -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
-                 -DPYTHON_INCLUDE_DIR=${PYTHON_INCLUDE_DIR}
-                 -DPYTHON_LIBRARY=${PYTHON_LIBRARY}
-                 -DPARAVIEW_BUILD_QT_GUI=OFF
-                 -DPARAVIEW_INSTALL_DEVELOPMENT=ON
-                 -DPARAVIEW_BUILD_PLUGIN_Manta=ON
+                 -DPARAVIEW_ENABLE_PYTHON:BOOL=ON
+                 -DPARAVIEW_ENABLE_PYTHON_FILTERS:BOOL=OFF
+                 -DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}
+                 -DPYTHON_INCLUDE_DIR:PATH=${PYTHON_INCLUDE_DIR}
+                 -DPYTHON_LIBRARY:FILEPATH=${PYTHON_LIBRARY}
+                 -DPARAVIEW_BUILD_PLUGIN_AnalyzeNIfTIReaderWriter:BOOL=OFF
+                 -DPARAVIEW_BUILD_PLUGIN_H5PartReader:BOOL=ON
+                 -DPARAVIEW_BUILD_PLUGIN_Moments:BOOL=OFF
+                 -DPARAVIEW_BUILD_PLUGIN_PointSprite:BOOL=ON
+                 -DPARAVIEW_BUILD_PLUGIN_Prism:BOOL=OFF
+                 -DPARAVIEW_BUILD_PLUGIN_SLACTools:BOOL=OFF
+                 -DPARAVIEW_BUILD_PLUGIN_SierraPlotTools:BOOL=OFF
+                 -DPARAVIEW_BUILD_PLUGIN_StreamingView:BOOL=OFF
+                 -DPARAVIEW_BUILD_PLUGIN_SurfaceLIC:BOOL=OFF
+                 -DPARAVIEW_BUILD_PLUGIN_pvblot:BOOL=OFF
+                 -DPARAVIEW_BUILD_QT_GUI:BOOL=OFF
+                 -DPARAVIEW_INSTALL_DEVELOPMENT:BOOL=ON
+                 -DPARAVIEW_BUILD_PLUGIN_Manta:BOOL=ON
                  -DMANTA_BUILD:PATH=${MANTA_BUILD}
                  -DMANTA_SOURCE:PATH=${MANTA_SOURCE}
       BUILD_COMMAND ${BUILD_CMD_SMP}
@@ -71,7 +85,7 @@ if (NOT PV_OSMESA)
 else (NOT PV_OSMESA)
 
     set(paraview_mesa_name    "paraview_mesa")
-    set(paraview_mesa_version "3.10")
+    set(paraview_mesa_version ${paraview_src_version})
     set(paraview_mesa_proj    "${paraview_mesa_name}-${paraview_mesa_version}")
     set(paraview_mesa_prefix  "${CMAKE_INSTALL_PREFIX}/pv_mesa-${paraview_src_version}")
   

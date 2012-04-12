@@ -1,11 +1,11 @@
 # Add-on CSE_WEB Packages
 #
 
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 2.8)
 
-project(CSE_WEB)
+project(ParaViewWebBuild)
 
-set(PACKAGE_VERSION "2011-05-02")
+set(PACKAGE_VERSION "2012-04-11")
 
 # Enable testing and dashboard driving:
 #

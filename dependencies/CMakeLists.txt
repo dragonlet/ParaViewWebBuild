@@ -26,9 +26,9 @@ else(APR_FOUND)
     set (apr_util_proj)
 endif(APR_FOUND)
 
-if ("${apr_ver}" LESS "1.3.0")
+if ("${apr_ver}" LESS "1.4.0")
     set(apr_name    "apr")
-    set(apr_version "1.3.12")
+    set(apr_version "1.4.6")
     set(apr_proj    "${apr_name}-${apr_version}")
     set(apr_prefix  "${CMAKE_INSTALL_PREFIX}")
     set(apr_url     "http://www.apache.org/dist/apr/${apr_proj}.tar.bz2")
@@ -45,9 +45,9 @@ if ("${apr_ver}" LESS "1.3.0")
     set(apr_conf ${apr_prefix}/bin/apr-1-config)
 endif ()
 
-if ("${apu_ver}" LESS "1.3.0")    
+if ("${apu_ver}" LESS "1.4.0")    
     set(apr_util_name    "apr-util")
-    set(apr_util_version "1.3.9")
+    set(apr_util_version "1.4.1")
     set(apr_util_proj    "${apr_util_name}-${apr_util_version}")
     set(apr_util_prefix  "${CMAKE_INSTALL_PREFIX}")
     set(apr_util_url     "http://www.apache.org/dist/apr/${apr_util_proj}.tar.bz2")
@@ -84,7 +84,7 @@ ExternalProject_Add(${activemq_proj}
 set(ACTIVEMQ_PREFIX ${activemq_prefix} PARENT_SCOPE)
 
 set(activemq_cpp_name    "activemq-cpp")
-set(activemq_cpp_version "3.1.3")
+set(activemq_cpp_version "3.4.1")
 set(activemq_cpp_proj    "${activemq_cpp_name}-${activemq_cpp_version}")
 set(activemq_cpp_prefix  "${CMAKE_INSTALL_PREFIX}")
 set(activemq_cpp_url     "http://mirror.atlanticmetro.net/apache/activemq/activemq-cpp/source/${activemq_cpp_name}-library-${activemq_cpp_version}-src.tar.gz")
@@ -95,6 +95,7 @@ ExternalProject_Add(${activemq_cpp_proj}
   INSTALL_DIR ${activemq_cpp_prefix}
   CONFIGURE_COMMAND <SOURCE_DIR>/configure
                     --prefix=<INSTALL_DIR>
+                    --disable-ssl
                     --with-apr=${apr_conf}
                     --with-apr-util=${apu_conf}
   #BUILD_IN_SOURCE 1
@@ -107,10 +108,11 @@ set(ACTIVEMQ_CPP_PREFIX ${activemq_cpp_prefix} PARENT_SCOPE)
 find_program (ANT_SYS_EXE ant /usr/bin)
 if (NOT ANT_SYS_EXE)
     set(ant_name    "ant")
-    set(ant_version "1.8.2")
+    set(ant_version "1.8.3")
     set(ant_proj    "${ant_name}-${ant_version}")
     set(ant_prefix  "${CMAKE_INSTALL_PREFIX}/ant")
     set(ant_url     "http://archive.apache.org/dist/ant/binaries/apache-${ant_proj}-bin.tar.bz2")
+    set(ant_url     "http://archive.apache.org/dist/ant/binaries/apache-${ant_proj}-bin.zip")
     CheckMirrors(${ant_proj} ${ant_url})
     
     ExternalProject_Add(${ant_proj}
@@ -129,7 +131,7 @@ endif (NOT ANT_SYS_EXE)
 set(TOMCAT_PREFIX ${CMAKE_INSTALL_PREFIX}/tomcat CACHE PATH "Tomcat prefix" FORCE)
 if (TOMCAT_INSTALL)
     set(tomcat_name    "tomcat")
-    set(tomcat_version "6.0.32")
+    set(tomcat_version "6.0.35")
     set(tomcat_proj    "${tomcat_name}-${tomcat_version}")
     set(tomcat_url     "http://apache.infocom.ua/tomcat/tomcat-6/v${tomcat_version}/bin/apache-${tomcat_proj}.tar.gz")
     CheckMirrors(${tomcat_proj} ${tomcat_url})
